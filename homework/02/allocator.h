@@ -3,22 +3,22 @@
 
 class LinearAllocator
 {
-  size_t total_memory;
-  size_t free_memory;
-  char* initial_ptr;
-  char* current_ptr;
-  
-  public:
+    size_t total_memory;
+    size_t free_memory;
+    char* initial_ptr;
+    char* current_ptr;
 
-      const size_t get_total_memory();
+    public:
 
-      const size_t get_free_memory();
+        const size_t get_total_memory();
 
-      LinearAllocator(size_t maxSize);
+        const size_t get_free_memory();
 
-      char* alloc(size_t size);
+        LinearAllocator(size_t maxSize);
 
-      void reset();
+        char* alloc(size_t size);
 
-      ~LinearAllocator();
+        void reset();
+
+        ~LinearAllocator();
 };

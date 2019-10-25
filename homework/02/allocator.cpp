@@ -1,11 +1,9 @@
 #include "allocator.h"
 #include <iostream>
 
-LinearAllocator::LinearAllocator(size_t maxSize)
+LinearAllocator::LinearAllocator(size_t maxSize):
+total_memory(maxSize), free_memory(maxSize)
 {
-  total_memory = maxSize;
-  free_memory = maxSize;
-
   if(maxSize == 0)
   {
     initial_ptr = nullptr;
@@ -13,22 +11,7 @@ LinearAllocator::LinearAllocator(size_t maxSize)
   }
   else
   {
-
-    try
-    {
-      if((initial_ptr = (char*)malloc(maxSize * sizeof(char))) == nullptr)
-      {
-        throw 1;
-      }
-
-    }
-
-    catch(int i)
-    {
-      std::cout<<"Allocation memory error.";
-      initial_ptr = nullptr;
-    }
-
+    initial_ptr = (char*)malloc(maxSize * sizeof(char));
     current_ptr = initial_ptr;
   }
 }
@@ -61,12 +44,12 @@ LinearAllocator::~LinearAllocator()
   current_ptr = nullptr;
 }
 
-size_t LinearAllocator::get_total_memory()
+const size_t LinearAllocator::get_total_memory()
 {
   return this->total_memory;
 }
 
-size_t LinearAllocator::get_free_memory()
+const size_t LinearAllocator::get_free_memory()
 {
   return this->free_memory;
 }
