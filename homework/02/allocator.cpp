@@ -53,3 +53,13 @@ const size_t LinearAllocator::get_free_memory()
 {
     return this->free_memory;
 }
+
+const char* LinearAllocator::get_init()
+{
+    return this->initial_ptr;
+}
+
+const char* LinearAllocator::get_cur()
+{
+    return this->current_ptr;
+}

@@ -14,6 +14,10 @@ class LinearAllocator
 
         const size_t get_free_memory();
 
+        const char* get_init();
+
+        const char* get_cur();
+
         LinearAllocator(size_t maxSize);
 
         char* alloc(size_t size);
