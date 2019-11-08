@@ -1,34 +1,46 @@
 #pragma once
+#include "list.cpp"
 #include <string>
 
 using namespace std;
 
 class Bigint
 {
+    static const int base = 10;
     int* digit;
+    bool minus;
     size_t length;
 
-    Bigint(const string& s);
+    public:
+        Bigint(const string &, bool);
 
-    Bigint(const int &a);
+        Bigint(const int &);
 
-    Bigint(int* a, const size_t& len);
+        Bigint(list<int> &, bool);
 
-    Bigint& operator = (const Bigint& next);
+        Bigint(const Bigint &b);
 
-    Bigint operator + (const Bigint& next);
+        ~Bigint();
 
-    Bigint operator - (const Bigint& next);
+        Bigint& operator = (const Bigint &);
 
-    Bigint operator - ();
+        friend Bigint operator + (const Bigint &, const Bigint &);
 
-    Bigint operator == (const Bigint& next);
+        friend Bigint operator - (const Bigint &, const Bigint &);
 
-    bool operator > (const Bigint& next);
+        friend Bigint operator - (const Bigint &);
 
-    bool operator < (const Bigint& next);
+        friend bool operator == (const Bigint &, const Bigint &);
 
-    bool operator >= (const Bigint& next);
+        friend bool operator != (const Bigint&, const Bigint&);
 
-    bool operator <= (const Bigint& next);
+        friend bool operator > (const Bigint &, const Bigint &);
+
+        friend bool operator < (const Bigint &, const Bigint &);
+
+        friend bool operator >= (const Bigint &, const Bigint &);
+
+        friend bool operator <= (const Bigint &, const Bigint &);
+
+        friend ostream& operator << (ostream &,const Bigint &);
 };

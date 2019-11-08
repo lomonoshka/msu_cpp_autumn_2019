@@ -4,9 +4,9 @@ main.o: main.cpp
 	g++ -c main.cpp --std=c++14
 allocator.o: Bigint.cpp Bigint.h
 	g++ -c Bigint.cpp --std=c++14
+list.o: list.cpp list.h
+	g++ -c Bigint.cpp --std=c++14
 clean:
 	rm *.o
-run:
-	./main
 test:
-	python3 ./tester.py
+	./main
