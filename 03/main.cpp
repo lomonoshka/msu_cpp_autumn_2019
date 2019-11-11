@@ -2,8 +2,8 @@
 
 main()
 {
-const int rows = 5;
-const int columns = 7;
+    const int rows = 5;
+    const int columns = 7;
 
     Matrix a(rows, columns), b(rows, columns);
 
@@ -34,6 +34,7 @@ const int columns = 7;
         cout<<"Incorrect bool operator.";
         return -1;
     }
+
     try
     {
         a[-1][0];

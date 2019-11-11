@@ -11,11 +11,22 @@ Matrix::Row::Row(const size_t& length, int* row)
 Matrix::Row::Row(const Row &r)
 {
     this->length = r.length;
-    for(int i=0; i<length; i++)
-        this->row[i] = r.row[i];
+    this->row = r.row;
 }
 
-int& Matrix::Row::operator[](const size_t &j) const
+const int& Matrix::Row::operator[](const size_t &j) const
+{
+    if(j >= this->length)
+    {
+        throw std::out_of_range("Index out of range.");
+    }
+    else
+    {
+    return row[j];
+    }
+}
+
+int& Matrix::Row::operator[](const size_t &j)
 {
     if(j >= this->length)
     {
@@ -54,6 +65,18 @@ Matrix::~Matrix()
 }
 
 const Matrix::Row Matrix::operator[](const size_t &i) const
+{
+    if(i >= rows)
+    {
+        throw std::out_of_range("Index out of range.");
+    }
+    else
+    {
+        return Row(columns, matrix + i*columns);
+    }
+}
+
+Matrix::Row Matrix::operator[](const size_t &i) 
 {
     if(i >= rows)
     {
@@ -107,12 +130,12 @@ ostream& operator<<(ostream &s, const Matrix &m)
     return s;
 }
 
-size_t& Matrix::get_columns()
+const size_t& Matrix::get_columns() const
 {
     return this->columns;
 }
 
-size_t& Matrix::get_rows()
+const size_t& Matrix::get_rows() const
 {
     return this->rows;
 }

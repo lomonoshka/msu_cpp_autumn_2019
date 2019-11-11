@@ -2,8 +2,6 @@
 #include <stdexcept>
 #include <iostream>
 
-using namespace std;
-
 class Matrix
 {
     class Row
@@ -14,7 +12,8 @@ class Matrix
     public:
         Row(const size_t&, int*);
         Row(const Row&);
-        int& operator[](const size_t&) const;
+        const int& operator[](const size_t&) const;
+        int& operator[](const size_t&);
 
     };
 
@@ -28,11 +27,12 @@ public:
     Matrix(const Matrix&);
     ~Matrix();
     const Row operator[](const size_t&) const;
+    Row operator[](const size_t&);
     Matrix& operator*=(const int&);
     bool operator==(const Matrix&) const;
     bool operator!=(const Matrix&) const;
-    size_t& get_rows();
-    size_t& get_columns();
-    friend ostream& operator<<(ostream&, const Matrix&);
+    const size_t& get_rows() const;
+    const size_t& get_columns() const;
+    friend std::ostream& operator<<(std::ostream&, const Matrix&);
 
 };
