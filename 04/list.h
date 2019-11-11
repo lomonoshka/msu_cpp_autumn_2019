@@ -1,4 +1,6 @@
 #pragma once
+#include <cstdio>
+
 
 template <class T>
 struct node
@@ -12,7 +14,7 @@ class list
 {
     node<T>* head;
     node<T>* tail;
-    long long length;
+    size_t length;
 
     public:
         list();
@@ -22,6 +24,6 @@ class list
         T pop();
         node<T>* get_head();
         node<T>* get_tail();
-        long long get_length();
+        size_t get_length();
         void print();
 };

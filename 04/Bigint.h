@@ -2,8 +2,6 @@
 #include "list.cpp"
 #include <string>
 
-using namespace std;
-
 class Bigint
 {
     static const int base = 10;
@@ -11,12 +9,12 @@ class Bigint
     bool minus;
     size_t length;
 
+    Bigint(list<int> &, bool);
+
     public:
-        Bigint(const string &, bool);
+        Bigint(const std::string &, bool);
 
         Bigint(const int &);
-
-        Bigint(list<int> &, bool);
 
         Bigint(const Bigint &b);
 
@@ -42,5 +40,5 @@ class Bigint
 
         friend bool operator <= (const Bigint &, const Bigint &);
 
-        friend ostream& operator << (ostream &,const Bigint &);
+        friend std::ostream& operator << (std::ostream &,const Bigint &);
 };

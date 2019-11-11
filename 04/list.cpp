@@ -40,7 +40,7 @@ node<T>* list<T>::get_tail()
 }
 
 template <class T>
-long long list<T>::get_length()
+size_t list<T>::get_length()
 {
     return this->length;
 }
