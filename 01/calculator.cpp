@@ -1,13 +1,32 @@
-#include "calculator.h"
 #include <ctype.h>
 #include <stdexcept>
 #include <memory>
 #include <cmath>
 #include <cassert>
 
+enum class Operation
+{
+    NOP,
+    ADD,
+    SUB,
+    MUL,
+    DIV
+};
+
+struct Node
+{
+    double value = 0;
+    Operation op = Operation::NOP;
+    Node *pLeft = nullptr;
+    Node *pRight = nullptr;
+};
+
 Node *ParseAtom(std::string &str);
 Node *ParseMulDiv(std::string &str);
 Node *ParseAddSub(std::string &str);
+Node *CreateTree(const std::string &expression);
+double calculate(Node *pExpression);
+void clear(Node *pExpression);
 
 void SkipSpaces(std::string &expression)
 {
@@ -102,7 +121,7 @@ Node *ParseAddSub(std::string &str)
         }
         catch (...)
         {
-            free(left);
+            (left);
             throw;
         }
 
@@ -116,8 +135,8 @@ Node *ParseAddSub(std::string &str)
         }
         catch (...)
         {
-            free(left);
-            free(right);
+            clear(left);
+            clear(right);
             throw;
         }
     }
@@ -154,7 +173,7 @@ Node *ParseMulDiv(std::string &str)
         }
         catch (...)
         {
-            free(left);
+            clear(left);
             throw;
         }
 
@@ -168,8 +187,8 @@ Node *ParseMulDiv(std::string &str)
         }
         catch (...)
         {
-            free(left);
-            free(right);
+            clear(left);
+            clear(right);
             throw;
         }
     }
@@ -182,7 +201,7 @@ Node *ParseAtom(std::string &str)
     Node *expr = new Node;
     if (!ParseDouble(str, expr->value))
     {
-        free(expr);
+        clear(expr);
         throw std::invalid_argument("Expected number at: " + str);
     }
     return expr;
@@ -236,19 +255,17 @@ double calculate(Node *pExpr)
     return pExpr->value;
 }
 
-void free(Node *node)
+void clear(Node *node)
 {
     if (node)
     {
         if (node->pLeft)
         {
-            free(node->pLeft);
-            node->pLeft = nullptr;
+            clear(node->pLeft);
         }
         if (node->pRight)
         {
-            free(node->pRight);
-            node->pRight = nullptr;
+            clear(node->pRight);
         }
         delete node;
     }

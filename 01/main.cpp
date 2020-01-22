@@ -6,7 +6,7 @@ double Calculate(const std::string &expression)
 {
     Node *pExpression = CreateTree(expression);
     const double result = calculate(pExpression);
-    free(pExpression);
+    clear(pExpression);
 
     return result;
 }
@@ -26,7 +26,7 @@ void print_res(const std::string &expression)
 
 int main()
 {
-    print_res("12/");
+    print_res("12/a");
     print_res("10 / 11                / 12");
     print_res("252 + 17 / 45 / 2");
     print_res("42 + 42 / 2 * 2");
