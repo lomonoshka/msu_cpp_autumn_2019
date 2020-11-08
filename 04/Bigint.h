@@ -1,44 +1,47 @@
 #pragma once
-#include "list.cpp"
+#include <algorithm>
+#include <cmath>
+#include <iostream>
 #include <string>
+#include <vector>
 
-class Bigint
-{
-    static const int base = 10;
-    int* digit;
-    bool minus;
-    size_t length;
+const uint16_t power = 4;
+const size_t base = pow(10, power);
 
-    Bigint(list<int> &, bool);
+class Bigint {
+   public:
+    Bigint(const std::string &str_number);
+    Bigint(int);
 
-    public:
-        Bigint(const std::string &, bool);
+    Bigint(const Bigint &b) = default;
+    ~Bigint() = default;
+    Bigint &operator=(const Bigint &rhs) = default;
 
-        Bigint(const int &);
+    friend Bigint addition_without_sign(const Bigint &lhs, const Bigint &rhs, bool is_positive);
+    friend Bigint difference_without_sign(const Bigint &lhs, const Bigint &rhs, bool is_positive);
 
-        Bigint(const Bigint &b);
+    friend Bigint operator+(const Bigint &lhs, const Bigint &rhs);
+    friend Bigint operator-(const Bigint &lhs, const Bigint &rhs);
+    friend Bigint operator*(const Bigint &lhs, const Bigint &rhs);
+    friend Bigint operator/(const Bigint &lhs, const Bigint &rhs);
+    const Bigint operator-() const;
 
-        ~Bigint();
+    friend bool operator==(const Bigint &lhs, const Bigint &rhs);
+    friend bool operator!=(const Bigint &lhs, const Bigint &rhs);
+    friend bool operator>(const Bigint &lhs, const Bigint &rhs);
+    friend bool operator<(const Bigint &lhs, const Bigint &rhs);
+    friend bool operator>=(const Bigint &lhs, const Bigint &rhs);
+    friend bool operator<=(const Bigint &lhs, const Bigint &rhs);
+    friend bool abs_compare(const Bigint &lhs, const Bigint &rhs);
 
-        Bigint& operator = (const Bigint &);
+    friend std::ostream &operator<<(std::ostream &os, const Bigint &rhs);
+    operator std::string() const;
+    void remove_leading_zeros();
 
-        friend Bigint operator + (const Bigint &, const Bigint &);
+   private:
+    Bigint() = default;
 
-        friend Bigint operator - (const Bigint &, const Bigint &);
-
-        friend Bigint operator - (const Bigint &);
-
-        friend bool operator == (const Bigint &, const Bigint &);
-
-        friend bool operator != (const Bigint&, const Bigint&);
-
-        friend bool operator > (const Bigint &, const Bigint &);
-
-        friend bool operator < (const Bigint &, const Bigint &);
-
-        friend bool operator >= (const Bigint &, const Bigint &);
-
-        friend bool operator <= (const Bigint &, const Bigint &);
-
-        friend std::ostream& operator << (std::ostream &,const Bigint &);
+   private:
+    std::vector<size_t> digits_;
+    bool is_positive_;
 };

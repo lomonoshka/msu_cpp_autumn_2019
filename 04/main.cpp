@@ -1,11 +1,10 @@
-#include "Bigint.cpp"
-#include <cstdlib>
+#include "Bigint.h"
+#include <iostream>
 using namespace std;
 
 int main()
 {
-
-    for(int count=0; count<10000; count++)
+for(int count=0; count<10000; count++)
     {
         long long digit1 = rand()%(int)(1e9);
         long long digit2 = rand()%(int)(1e9);
